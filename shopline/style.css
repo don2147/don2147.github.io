@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.slogan {
+    text-align: center;
+    padding: 60px 40px;
+    background-color: #f7f8f9;
+}
+.card {
+    padding: 20px 0 0 0;
+    display: flex;
+    max-width: 1200px;
+    gap: 5%;
+    margin: auto;
+}
+.card .text {
+    width: 100%;
+}
+h1, h2 {
+    line-height: 1.5em;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+}
+h2,h3, p {
+        margin: 24px 0;
+    }
+
+.card h2 {
+    font-size: 26px;
+    text-align: left;
+}
+.card ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding-inline-start: 0px;
+}
+.card ul li::marker {
+    color: blue;
+}
+.card li {
+    line-height: 2;
+    margin: 0 20px 0 0;
+    flex: 33%;
+}
+
+.card .pic {
+    padding: 20px 0 0 0;
+    flex: 67%;
+}
+
+.card-link a {
+    text-underline-offset: 3px;
+    color: #00f;
+}
+
+.link-right {
+    text-decoration: none;
+}
+
+.card img {
+    height: 80%
+}
+
+.cardlist .card.card:nth-child(2n) {
+    flex-direction: row-reverse;
+}
+
+.card_list.card:nth-child(2N) {
+    flex-direction: row-reverse;
+}
+/* last */
+.service {
+    padding: 10px;
+    background-color: #DDDDDD;
+}
+
+.service h3 {
+    font-size: 20px;
+    margin-block-end: 0px;
+}
+
+.service p {
+    font-size: 15px;
+}
+
+.service img {
+    width: 100px;
+}
+
+.service-cardlist {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.service-card {
+    width: 33%;
+    margin: auto;
+    text-align: center;
+}

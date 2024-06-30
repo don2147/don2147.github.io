@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>終極密碼遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>終極密碼</h1>
+    <input type="number" id="textBox" placeholder="輸入你的猜測">
+    <br><br>
+    <button class="guess-btn">猜</button>
+    <button class="reveal-btn">看答案</button>
+    <button class="reset-btn">重新開始</button>
+    <p id="message"></p>
+
+    <script>
+        let secretNumber;
+        let min;
+        let max;
+
+        const textBox = document.querySelector('#textBox');
+        const message = document.querySelector('#message');
+
+        function resetGame() {
+        secretNumber = Math.floor(Math.random() * 100) + 1;
+        min = 1;
+        max = 100;
+        textBox.value = '';
+        message.textContent = `猜一個介於 ${min} 和 ${max} 之間的數字。`;
+        textBox.disabled = false;
+        document.querySelector('.guess-btn').disabled = false;
+        document.querySelector('.reveal-btn').disabled = false;
+}
+
+        function checkGuess() {
+        const userGuess = Number(textBox.value);
+
+    if (!userGuess || userGuess < min || userGuess > max) {
+        message.textContent = `請輸入 ${min} 到 ${max} 之間的數字。`;
+        return;
+    }
+
+    if (userGuess === secretNumber) {
+        message.textContent = `答案為：${secretNumber}`;
+        textBox.disabled = true;
+        document.querySelector('.guess-btn').disabled = true;
+        document.querySelector('.reveal-btn').disabled = true;
+    } else if (userGuess < secretNumber) {
+        min = userGuess;
+        message.textContent = ` ${min} 到 ${max} 。`;
+    } else {
+        max = userGuess;
+        message.textContent = ` ${min} 到 ${max} 。`;
+    }
+
+    textBox.value = '';
+    textBox.focus();
+}
+
+function Answer() {
+    message.textContent = `正確答案是：${secretNumber}`;
+    textBox.disabled = true;
+    document.querySelector('.guess-btn').disabled = true;
+    document.querySelector('.reveal-btn').disabled = true;
+}
+
+    document.querySelector('.guess-btn').addEventListener('click', checkGuess);
+    document.querySelector('.reveal-btn').addEventListener('click', Answer);
+    document.querySelector('.reset-btn').addEventListener('click', resetGame);
+
+// 初始化遊戲
+resetGame();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.calendar {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.date:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#now, #prev-month, #next-month, #add-event {
+    background-color: #38d093;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.current-month {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.weekdays, .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 1px solid #ccc;
+}
+
+.weekdays .day, .dates .date {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 15px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.dates .date {
+    min-height: 80px;
+}
+
+.date .day-number {
+    font-weight: bold;
+    font-size: 1em;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.date .event {
+    margin-top: 20px;
+    background-color: #ffc;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.prev-month, .next-month {
+    color: #ccc;
+}
+
+.today {
+    background-color: #ffeb3b;
+}

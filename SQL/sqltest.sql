@@ -1,6 +1,6 @@
 USE [IG_Design]
 GO
-/****** Object:  Table [dbo].[Block]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Block]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[Block](
 	[BlockTime] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Follower]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Follower]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -28,7 +28,7 @@ CREATE TABLE [dbo].[Follower](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Likes]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Likes]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -42,7 +42,7 @@ CREATE TABLE [dbo].[Likes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Media]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Media]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -58,7 +58,7 @@ CREATE TABLE [dbo].[Media](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Message]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Message]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -67,14 +67,14 @@ CREATE TABLE [dbo].[Message](
 	[Message] [nchar](10) NOT NULL,
 	[UserID] [int] NOT NULL,
 	[postMessage] [nvarchar](50) NOT NULL,
-	[MessageTime] [time](7) NOT NULL,
+	[MessageTime] [datetime] NOT NULL,
  CONSTRAINT [PK_Message] PRIMARY KEY CLUSTERED 
 (
 	[Message] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Post]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Post]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -83,14 +83,32 @@ CREATE TABLE [dbo].[Post](
 	[PostID] [int] NOT NULL,
 	[UserID] [int] NOT NULL,
 	[PostType] [nchar](10) NOT NULL,
-	[Updatetime] [time](7) NOT NULL,
+	[Updatetime] [datetime] NULL,
+	[PostPicture] [varbinary](50) NULL,
  CONSTRAINT [PK_Post] PRIMARY KEY CLUSTERED 
 (
 	[PostID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Short]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Reply]    Script Date: 2024/7/28 下午 09:45:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reply](
+	[ReplyID] [int] NOT NULL,
+	[CommentID] [int] NOT NULL,
+	[UserID] [int] NOT NULL,
+	[ReplayContent] [nvarchar](50) NOT NULL,
+	[Replytime] [datetime] NOT NULL,
+ CONSTRAINT [PK_Reply] PRIMARY KEY CLUSTERED 
+(
+	[ReplyID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Short]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +125,7 @@ CREATE TABLE [dbo].[Short](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Story]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[Story]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -126,19 +144,21 @@ CREATE TABLE [dbo].[Story](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserID]    Script Date: 2024/7/27 上午 10:41:53 ******/
+/****** Object:  Table [dbo].[UserID]    Script Date: 2024/7/28 下午 09:45:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[UserID](
 	[UserID] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
 	[Photo] [varbinary](50) NOT NULL,
 	[Gender] [char](10) NOT NULL,
 	[location] [varchar](50) NOT NULL,
 	[privacySetting] [nchar](10) NOT NULL,
 	[password] [varchar](50) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
+	[Follow] [int] NOT NULL,
  CONSTRAINT [PK_UserID] PRIMARY KEY CLUSTERED 
 (
 	[UserID] ASC
@@ -160,6 +180,11 @@ REFERENCES [dbo].[UserID] ([UserID])
 GO
 ALTER TABLE [dbo].[Follower] CHECK CONSTRAINT [FK_Follower_UserID1]
 GO
+ALTER TABLE [dbo].[Message]  WITH CHECK ADD  CONSTRAINT [FK_Message_Reply] FOREIGN KEY([UserID])
+REFERENCES [dbo].[Reply] ([ReplyID])
+GO
+ALTER TABLE [dbo].[Message] CHECK CONSTRAINT [FK_Message_Reply]
+GO
 ALTER TABLE [dbo].[Message]  WITH CHECK ADD  CONSTRAINT [FK_Message_UserID] FOREIGN KEY([UserID])
 REFERENCES [dbo].[UserID] ([UserID])
 GO
@@ -179,6 +204,11 @@ ALTER TABLE [dbo].[Post]  WITH CHECK ADD  CONSTRAINT [FK_Post_UserID1] FOREIGN K
 REFERENCES [dbo].[UserID] ([UserID])
 GO
 ALTER TABLE [dbo].[Post] CHECK CONSTRAINT [FK_Post_UserID1]
+GO
+ALTER TABLE [dbo].[Reply]  WITH CHECK ADD  CONSTRAINT [FK_Reply_UserID] FOREIGN KEY([UserID])
+REFERENCES [dbo].[UserID] ([UserID])
+GO
+ALTER TABLE [dbo].[Reply] CHECK CONSTRAINT [FK_Reply_UserID]
 GO
 ALTER TABLE [dbo].[Short]  WITH CHECK ADD  CONSTRAINT [FK_Short_Post] FOREIGN KEY([ShortID])
 REFERENCES [dbo].[Post] ([PostID])

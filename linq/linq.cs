@@ -193,13 +193,16 @@ namespace Models
             // 11. 找出誰最後獲得學分數最高
             Console.WriteLine("11. 找出誰最後獲得學分數最高");
             {
-                //作答區
-                var mostScore = studentList.OrderByDescending(student =>
-                            student.CourseList.Sum(courseId => courseList.First(course => course.CourseId == courseId).Credit))
-                            .FirstOrDefault();
-                if (mostScore != null)
+                // 作答區
+                var maxCredits = studentList.Max(student => 
+                                student.CourseList.Sum(courseId => courseList.First(course => course.CourseId == courseId).Credit));
+                
+                var topStudents = studentList.Where(student => 
+                                student.CourseList.Sum(courseId => courseList.First(course => course.CourseId == courseId).Credit) == maxCredits);
+            
+                foreach (var student in topStudents)
                 {
-                    Console.WriteLine($"{mostScore.Name}");
+                    Console.WriteLine($"{student.Name}");
                 }
             }
 
